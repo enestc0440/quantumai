@@ -24,6 +24,7 @@ from tqdm import tqdm
 from typing import List
 
 # ============ 1. CONFIG ============
+
 class Config:
     def __init__(self):
         self.vocab_size = 50000
@@ -41,6 +42,7 @@ class Config:
         self.rep_penalty = 1.2
 
 # ============ 2. TOKENIZER ============  
+
 class QuantumTokenizer:
     def __init__(self, config):
         self.tokenizer = AutoTokenizer.from_pretrained("savasy/bert-base-turkish-squad")
@@ -51,7 +53,9 @@ class QuantumTokenizer:
     
     def decode(self, ids: List[int]) -> str:
         return self.tokenizer.decode(ids, skip_special_tokens=True)
+
 # ============ 3. DATASET ============
+
 class QuantumDataset(Dataset):
     def __init__(self, texts: List[str], tokenizer: QuantumTokenizer):
         self.data = [tokenizer.encode(text) for text in texts]
@@ -65,6 +69,7 @@ class QuantumDataset(Dataset):
         return x, y
 
 # ============ 4. MODEL ============  
+
 class PositionalEncoding(nn.Module):
     def __init__(self, d_model: int, max_len: int = 5000):
         super().__init__()
@@ -129,6 +134,7 @@ class QuantumAI(nn.Module):
         return tokenizer.decode(input_ids[0].tolist())
 
 # ============ 5. TRAINER ============
+
 class QuantumTrainer:
     def __init__(self, model: QuantumAI, config: Config):
         self.model = model
@@ -158,6 +164,7 @@ class QuantumTrainer:
         return total_loss / len(loader)
 
 # ============ 6. MAIN ============  
+
 if __name__ == "__main__":
     config = Config()
     tokenizer = QuantumTokenizer(config)
