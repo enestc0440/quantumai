@@ -43,7 +43,8 @@ class Config:
 # ============ 2. TOKENIZER ============  
 class QuantumTokenizer:
     def __init__(self, config):
-        self.tokenizer = AutoTokenizer.from_pretrained("dbmdz/bert-base-turkish-128k")
+        self.tokenizer = AutoTokenizer.from_pretrained("savasy/bert-base-turkish-squad")
+
         self.config = config
         
     def encode(self, text: str) -> List[int]:
