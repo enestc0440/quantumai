@@ -44,7 +44,6 @@ class Config:
 class QuantumTokenizer:
     def __init__(self, config):
         self.tokenizer = AutoTokenizer.from_pretrained("savasy/bert-base-turkish-squad")
-
         self.config = config
         
     def encode(self, text: str) -> List[int]:
@@ -52,7 +51,6 @@ class QuantumTokenizer:
     
     def decode(self, ids: List[int]) -> str:
         return self.tokenizer.decode(ids, skip_special_tokens=True)
-
 # ============ 3. DATASET ============
 class QuantumDataset(Dataset):
     def __init__(self, texts: List[str], tokenizer: QuantumTokenizer):
